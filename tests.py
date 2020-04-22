@@ -1,4 +1,5 @@
 import os
+from typing import Dict, List
 
 def assert_data(annotation: str, img_dir: str) -> None:
     """Asserts that there is an image for every annotation for 
@@ -24,7 +25,7 @@ def assert_data(annotation: str, img_dir: str) -> None:
       
     print("All assertions have been passed smoothly.")
     
-def test_types_values(dictionary, labels):
+def test_types_values(dictionary: Dict, labels: List):
     """Asserts that all types and values are correct.
     """
     for img_path in dictionary:

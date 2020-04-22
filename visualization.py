@@ -1,3 +1,5 @@
+from typing import Tuple, List
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import cv2
@@ -64,7 +66,7 @@ def two_stacked_horizontal_histogram(
                         title: str = "Distribution of classes with the mirrored images",
                         xlabel: str = "Frequency",
                         ylabel: str = "Classes",
-                        legend: Tuple = ('Original data', 'Mirrored')) -> None:
+                        legend: Tuple[str,str] = ('Original data', 'Mirrored')) -> None:
     """Plots two stacked histograms given two arrays
     """
     s1=pd.Series(first_arr, name="original")
