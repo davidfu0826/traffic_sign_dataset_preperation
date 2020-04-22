@@ -1,4 +1,4 @@
-from typing import Tuple, List
+from typing import Tuple, List, Dict
 
 import matplotlib.pyplot as plt
 import seaborn as sns
