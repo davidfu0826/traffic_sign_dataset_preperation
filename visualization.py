@@ -135,7 +135,7 @@ def imshow_darknet(jpg_path: str,
         pt2 = (int(center_x - bbox_width/2), int(center_y - bbox_height/2))
         pt3 = (int(center_x), int(center_y)+10)
 
-        img = cv2.putText(img, label, pt3, 0, 0.4, (0,255,0)) 
+        img = cv2.putText(img, label, pt3, cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,255,0)) 
         img = cv2.rectangle(img, pt1, pt2, (0,255,0), 5)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
