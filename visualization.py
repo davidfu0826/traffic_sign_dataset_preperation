@@ -142,7 +142,7 @@ def imshow_darknet(jpg_path: str,
     plt.figure(figsize=figsize)
     plt.imshow(img)
     
-def accuracy_frequency_distribution(accuracies: List[List, List]) -> None:
+def accuracy_frequency_distribution(accuracies: List[List]) -> None:
     """Displays the distribution of prediction over accuracies, where the different
     labels also can be visualized.
     """
