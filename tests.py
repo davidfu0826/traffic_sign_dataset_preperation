@@ -43,3 +43,14 @@ def test_types_values(dictionary: Dict, labels: List):
             for coord in bbox["signC"]:
                 assert coord >= 0
     print("All assertions have been passed smoothly.")
+    
+def test_darknet_txt_paths(path_to_samples_list: str):
+    """Asserts that all files listed the train-, valid- images for Darknet format dataset
+    exists and their corresponding labels too.
+    """
+    with open(path_to_samples_list, "r") as f:
+        data = f.readlines()
+        for img_path in [path[:-1] for path in data]:
+            assert os.path.isfile(img_path)
+            assert os.path.isfile(img_path.replace("/images/", "/labels/").replace(".jpg", ".txt"))
+    print(f"All files listed in '{path_to_samples_list}' exists.")
