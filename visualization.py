@@ -141,3 +141,23 @@ def imshow_darknet(jpg_path: str,
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     plt.figure(figsize=figsize)
     plt.imshow(img)
+    
+def accuracy_frequency_distribution(accuracies: List[List, List]) -> None:
+    """Displays the distribution of prediction over accuracies, where the different
+    labels also can be visualized.
+    """
+    sns.set_style("darkgrid")
+    df = pd.DataFrame(accuracies, columns=["accuracy", "label"])
+
+    plt.figure(figsize=(20,10))
+    labels = list()
+    for label, group in df.groupby(["label"]):
+        if len(group) > 100:
+            labels.append(label)
+            sns.distplot(group["accuracy"], kde=False, bins=100);
+    plt.xlim([0, 1])
+    plt.title("Prediction accuracy distribution")
+    plt.ylabel("Frequency")
+    plt.xlabel("Accuracy")
+    plt.legend(labels)
+    plt.show()
