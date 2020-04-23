@@ -9,7 +9,7 @@ def horizontal_histogram_counts(data: pd.Series, title: str, figsize: Tuple[int,
     """Displays a horizontal histogram over class frequencies.  
 
     Args:
-        data: List of sample labels
+        data: Pandas series of sample labels
         title: Title for the figure 
         figsize: Size of the figure (optional)
     """
