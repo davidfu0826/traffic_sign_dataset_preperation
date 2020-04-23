@@ -101,3 +101,43 @@ def two_stacked_horizontal_histogram(
     l.draw_frame(False)
 
     plt.xlabel('Frequency')
+    
+    
+def imshow_darknet(jpg_path: str, 
+                   txt_path: str, 
+                   names_path: str, 
+                   figsize: Tuple[int,int] = (10, 10)) -> None:
+    """Displays images in a dataset in Darknet format.
+    """
+    with open(names_path, "r") as f:
+        labels = f.readlines()
+        labels = [label[:-1] for label in labels]
+
+    idx_to_label = dict()
+    for idx, label in enumerate(labels):
+        idx_to_label[idx] = label
+
+    with open(txt_path, "r") as f:
+        bboxes = f.readlines()
+
+    img = cv2.imread(jpg_path)
+    height, width, _ = img.shape
+
+    for data_raw in bboxes:
+        data = data_raw[:-1].split(" ")
+        label = idx_to_label[int(data[0])]
+
+        #class x_center y_center width height
+        center_x, center_y      = float(data[1])*width, float(data[2])*height
+        bbox_width, bbox_height = float(data[3])*width, float(data[4])*height
+
+        pt1 = (int(center_x + bbox_width/2), int(center_y + bbox_height/2))
+        pt2 = (int(center_x - bbox_width/2), int(center_y - bbox_height/2))
+        pt3 = (int(center_x), int(center_y)+10)
+
+        img = cv2.putText(img, label, pt3, 0, 0.4, (0,255,0)) 
+        img = cv2.rectangle(img, pt1, pt2, (0,255,0), 5)
+
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.figure(figsize=figsize)
+    plt.imshow(img)
