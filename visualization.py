@@ -133,10 +133,10 @@ def imshow_darknet(jpg_path: str,
 
         pt1 = (int(center_x + bbox_width/2), int(center_y + bbox_height/2))
         pt2 = (int(center_x - bbox_width/2), int(center_y - bbox_height/2))
-        pt3 = (int(center_x), int(center_y)+10)
+        pt3 = (int(center_x), int(center_y)+20)
 
-        img = cv2.putText(img, label, pt3, cv2.FONT_HERSHEY_TRIPLEX, 0.6, (0,255,0)) 
-        img = cv2.rectangle(img, pt1, pt2, (0,255,0), 5)
+        img = cv2.putText(img, label, pt3, cv2.FONT_HERSHEY_TRIPLEX, 0.6, (2,2,255)) 
+        img = cv2.rectangle(img, pt1, pt2, (2,2,255), 5)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     plt.figure(figsize=figsize)
