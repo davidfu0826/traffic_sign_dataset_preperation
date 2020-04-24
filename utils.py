@@ -1,4 +1,5 @@
 import os
+from PIL import Image
 
 def is_valid_decimal(string: str):
     """Given a string e.g. "2.29" or "2.4a2",
@@ -59,9 +60,15 @@ def extract_data(filename: str, directory: str):
         img = annotation[0]
         bbox_metadata = annotation[1]
         bbox = list()
+        
+        # Path to images
+        img_path = os.path.join(directory, img)
+        im = Image.open(img_path)
+        width, height = im.size
 
         # Iterate over each bounding box
         for annot in bbox_metadata:
+            
             if "MISC_SIGNS" == annot:
                 signStatus = 'N/A'
                 signTypes = "MISC_SIGNS"
@@ -111,12 +118,23 @@ def extract_data(filename: str, directory: str):
 
                 if tl_x < 0:
                     tl_x = 0
+                elif tl_x > width:
+                    tl_x = width
+                                        
                 if tl_y < 0:
                     tl_y = 0
+                elif tl_y > height:
+                    tl_y = height
+                    
                 if br_x < 0:
                     br_x = 0
+                elif br_x > width:
+                    br_x = width
+                    
                 if br_y < 0:
                     br_y = 0
+                elif br_y > height:
+                    br_y = height
 
                 signBB = (tl_x, tl_y, br_x, br_y)
                 signC = (br_x + tl_x)/2, (br_y + tl_y)/2
@@ -131,7 +149,7 @@ def extract_data(filename: str, directory: str):
                             "signSize": signSize, 
                             "aspectRatio": aspectRatio})
             
-            img_path = os.path.join(directory, img)
+            
             annot_dict[img_path] = bbox
     return annot_dict
 
