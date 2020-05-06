@@ -11,18 +11,10 @@ Follow the following notebook to se examples of usage
 In the following segment, useful are listed:
 
 `visualization.py`
-- `imshow_darknet(jpg_path: str, `
-                   `txt_path: str,` 
-                   `names_path: str,` 
-                   `figsize: Tuple[int,int] = (10, 10)) -> None`
+- `imshow_darknet(jpg_path: str, txt_path: str, names_path: str, figsize: Tuple[int,int] = (10, 10)) -> None`
                    
-- `two_stacked_horizontal_histogram(`
-                        `first_arr: List[str], second_arr: List[str],`
-                        `title: str = "Distribution of classes with the mirrored images",`
-                        `xlabel: str = "Frequency",`
-                        `ylabel: str = "Classes",`
-                        `legend: Tuple[str,str] = ('Original data', 'Mirrored')) -> None`
+- `two_stacked_horizontal_histogram(first_arr: List[str], second_arr: List[str], title: str = "Distribution of classes with the mirrored images", xlabel: str = "Frequency", ylabel: str = "Classes", legend: Tuple[str,str] = ('Original data', 'Mirrored')) -> None`
 - `horizontal_histogram_counts(data: pd.Series, title: str, figsize: Tuple[int,int] = (15, 15)) -> None`
 
 `tests.py`
-- `test_darknet_txt_paths()`
+- `test_darknet_txt_paths(path_to_samples_list: str)`
