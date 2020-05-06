@@ -30,4 +30,4 @@ In the following segment, useful are listed:
 
 `tests.py`
 - Confirm/Check that there is an annotation (/labels/\*\*.txt) for each image (/images/\*\*.jpg) in Darknet format
-- `test_darknet_txt_paths(path_to_samples_list: str)`
+  - `test_darknet_txt_paths(path_to_samples_list: str)`
