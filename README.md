@@ -25,7 +25,10 @@ In the following segment, very useful functions are listed:
 `visualization.py`
 - Display an image with bounding boxes given data in Darknet format
   - `imshow_darknet(jpg_path: str, txt_path: str, names_path: str, figsize: Tuple[int,int] = (10, 10)) -> None`
-  - Example CLI usage: `$ python3 -c "from visualization import imshow_darknet; imshow_darknet('image/img05.jpg', 'labels/img05.txt', 'something/metadata.data')"`
+    - `jpg_path` - Path to image
+    - `txt_path` - Path to annotation text-file
+    - `names_path` - Path to file containing class names
+  - Example CLI usage: `$ python3 -c "from visualization import imshow_darknet; imshow_darknet('image/img05.jpg', 'labels/img05.txt', 'something/metadata.names')"`
   
 ## Functions that can be used in python script/notebooks
 `visualization.py`
