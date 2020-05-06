@@ -5,6 +5,10 @@ Most of the functions are hard-coded specifically for this dataset, but some of 
 
 # Requirements
  opencv 4.1.2
+ pillow 6.2.0
+ matplotlib 3.1.1
+ seaborn 0.10.0
+ pandas 1.0.3
 
 # Usage
 Follow the following notebook to se examples of usage
