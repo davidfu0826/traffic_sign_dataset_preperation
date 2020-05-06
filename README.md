@@ -24,9 +24,10 @@ In the following segment, useful are listed:
   - Example usage: `$ python3 -c "from visualization import imshow_darknet; imshow_darknet('image/img05.jpg', 'labels/img05.txt')"`
                    
 - Display two horizontal histograms given two lists
- - `two_stacked_horizontal_histogram(first_arr: List[str], second_arr: List[str], title: str = "Distribution of classes with the mirrored images", xlabel: str = "Frequency", ylabel: str = "Classes", legend: Tuple[str,str] = ('Original data', 'Mirrored')) -> None`
+  - `two_stacked_horizontal_histogram(first_arr: List[str], second_arr: List[str], title: str = "Distribution of classes with the mirrored images", xlabel: str = "Frequency", ylabel: str = "Classes", legend: Tuple[str,str] = ('Original data', 'Mirrored')) -> None`
 - Display a horizontal histogram given a list
- - `horizontal_histogram_counts(data: pd.Series, title: str, figsize: Tuple[int,int] = (15, 15)) -> None`
+  - `horizontal_histogram_counts(data: pd.Series, title: str, figsize: Tuple[int,int] = (15, 15)) -> None`
 
 `tests.py`
+- Confirm/Check that there is an annotation (/labels/\*\*.txt) for each image (/images/\*\*.jpg) in Darknet format
 - `test_darknet_txt_paths(path_to_samples_list: str)`
