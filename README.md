@@ -25,7 +25,7 @@ In the following segment, very useful functions are listed:
 `viz_darknet.py`
 - Display an image with bounding boxes given data in Darknet format
   - `python3 viz_darknet.py --img-dir <img path> --annot <txt path> --names <path label file>`
-  - Example CLI usage: `$ python3 viz_darknet.py --img-dir image/img05.jpg --annot labels/img05.txt --names something/metadata.names
+  - Example CLI usage: `$ python3 viz_darknet.py --img-dir image/img05.jpg --annot labels/img05.txt --names something/metadata.names`
   
 ## Functions that can be used in python script/notebooks
 `visualization.py`
