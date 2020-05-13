@@ -7,6 +7,7 @@ from pathlib import Path
 
 import cv2
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 COCO_classes_ignore = [
  #'airplane',
@@ -159,7 +160,7 @@ if __name__ == "__main__":
     parent_dir = "darknet_format"
     Path(os.path.join(parent_dir, "images")).mkdir(parents=True, exist_ok=True)
     Path(os.path.join(parent_dir, "labels")).mkdir(parents=True, exist_ok=True)
-    for file_name in imgs:
+    for file_name in tqdm(imgs):
         img_path = imgs[file_name]
         
         # Copy image to this directory
