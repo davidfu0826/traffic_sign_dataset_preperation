@@ -141,6 +141,7 @@ def imshow_darknet(jpg_path: str,
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     plt.figure(figsize=figsize)
     plt.imshow(img)
+    plt.show()
     
 def accuracy_frequency_distribution(accuracies: List[List]) -> None:
     """Displays the distribution of prediction over accuracies, where the different

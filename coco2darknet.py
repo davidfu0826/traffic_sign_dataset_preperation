@@ -8,6 +8,93 @@ from pathlib import Path
 import cv2
 import matplotlib.pyplot as plt
 
+COCO_classes_ignore = [
+ #'airplane',
+ 'apple',
+ 'backpack',
+ 'banana',
+ 'baseball bat',
+ 'baseball glove',
+ 'bear',
+ 'bed',
+ 'bench',
+ #'bicycle',
+ #'bird',
+ #'boat',
+ 'book',
+ 'bottle',
+ 'bowl',
+ 'broccoli',
+ #'bus',
+ 'cake',
+ #'car',
+ 'carrot',
+ #'cat',
+ 'cell phone',
+ 'chair',
+ 'clock',
+ 'couch',
+ 'cow',
+ 'cup',
+ 'dining table',
+ #'dog',
+ 'donut',
+ 'elephant',
+ 'fire hydrant',
+ 'fork',
+ 'frisbee',
+ 'giraffe',
+ 'hair drier',
+ 'handbag',
+ #'horse',
+ 'hot dog',
+ 'keyboard',
+ 'kite',
+ 'knife',
+ 'laptop',
+ 'microwave',
+ #'motorcycle',
+ 'mouse',
+ 'orange',
+ 'oven',
+ 'parking meter',
+ #'person',
+ 'pizza',
+ 'potted plant',
+ 'refrigerator',
+ 'remote',
+ 'sandwich',
+ 'scissors',
+ 'sheep',
+ 'sink',
+ 'skateboard',
+ 'skis',
+ 'snowboard',
+ 'spoon',
+ 'sports ball',
+ #'stop sign',
+ 'suitcase',
+ 'surfboard',
+ 'teddy bear',
+ 'tennis racket',
+ 'tie',
+ 'toaster',
+ 'toilet',
+ 'toothbrush',
+ #'traffic light',
+ #'train',
+ #'truck',
+ 'tv',
+ 'umbrella',
+ 'vase',
+ 'wine glass',
+ 'zebra']
+
+coco2017toSTS = {
+    "stop sign": "STOP",
+    "motorcycle": "motorbike",
+}
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser() 
     parser.add_argument("--json", type=str, required=True,
@@ -24,6 +111,7 @@ if __name__ == "__main__":
     path_imglab_json = args.json#"../../../Datasets/Swedish_Traffic_Signs/EmilyImages3/imx424-05-08_ground_truth/annotation/250_coco_imglab-2.json"
     with open(path_imglab_json) as f:
         data = json.load(f)
+    print(f"Annotation file '{path_imglab_json}' loaded")
         
     # Encoder, Decoder
     img_to_idx = {img["file_name"]:img["id"] for img in data["images"]}
@@ -80,54 +168,65 @@ if __name__ == "__main__":
         shutil.copyfile(src, dst)
         
         # Write to a new .txt file in this directory
-        bboxes = annot_dict[file_name]
+        if annot_dict.get(file_name) is None:
+            print(f"Couldn't find {file_name} in annotation file.")
+        else:
+            bboxes = annot_dict[file_name]
         txt_name = file_name.replace(".jpg", ".txt").replace(".png", ".txt")
         size = img_to_size[file_name]
         
         with open(os.path.join(parent_dir, "labels", txt_name), "w") as f:
             for bbox in bboxes:
-
-                top_left_x = bbox["bbox"][0]
-                top_left_y = bbox["bbox"][1]
-                height = bbox["bbox"][3]
-                width = bbox["bbox"][2]
-
-                center_x = (top_left_x + width/2)
-                center_y = (top_left_y + height/2)
-                width /= size[0]
-                height /= size[1]
-                
-                if center_x < 0:
-                    center_x = 0
-                elif center_x > size[0]:
-                    center_x = size[0]
-                if center_y < 0:
-                    center_y = 0
-                elif center_y > size[1]:
-                    center_y = size[1]
-                
-                center_x /= size[0]
-                center_y /= size[1]
-                
                 label = bbox["label"]
-                
-                # Hard coded
-                #if label == "bike":
-                #    label = "bicycle"
-                
-                if class_to_idx.get(label) is None:
-                    class_id = class_to_idx.get(label.upper()) 
+                if label in COCO_classes_ignore:
+                    pass
                 else:
-                    class_id = class_to_idx.get(label)
-                
-                #print(label)
-                if class_id is None:
-                    print(f"'{label}' was not found in .names file.")
-                    #print("Setting to default value: 0")
-                    class_id = 0 # Or else will cause error
-                else:
+                    top_left_x = bbox["bbox"][0]
+                    top_left_y = bbox["bbox"][1]
+                    height = bbox["bbox"][3]
+                    width = bbox["bbox"][2]
+
+                    center_x = (top_left_x + width/2)
+                    center_y = (top_left_y + height/2)
+                    width /= size[0]
+                    height /= size[1]
                     
-                    f.write(f"{class_id} {center_x} {center_y} {width} {height}\n")
+                    if center_x < 0:
+                        center_x = 0
+                    elif center_x > size[0]:
+                        center_x = size[0]
+                    if center_y < 0:
+                        center_y = 0
+                    elif center_y > size[1]:
+                        center_y = size[1]
+                    
+                    center_x /= size[0]
+                    center_y /= size[1]
+                    
+                    
+                    # Hard coded
+                    #if label == "bike":
+                    #    label = "bicycle"
+                    #if label == "airplane":
+                    #    label = "aeroplane"
+                    #if label == "motorcycle":
+                    #    label = "motorbike"
+                    if coco2017toSTS.get(label) is not None:
+                        label = coco2017toSTS[label]
+                    
+                    if class_to_idx.get(label) is None:
+                        class_id = class_to_idx.get(label.upper()) 
+                    else:
+                        class_id = class_to_idx.get(label)
+                    
+                    #print(label)
+                    if class_id is None:
+                        print(f"'{label}' was not found in .names file.")
+                        #print("Setting to default value: 0")
+                        class_id = 0 # Or else will cause error
+                    else:
+                        
+                        f.write(f"{class_id} {center_x} {center_y} {width} {height}\n")
                 
     path = os.path.join(parent_dir, "images").replace("\\", "/")
     img_paths = glob.glob(path + "/*.jpg") + glob.glob(path + "/*.png")
