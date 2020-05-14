@@ -180,6 +180,8 @@ def read_annot(path: str) -> Dict:
                     bbox_data = bbox.split(",")
                     bbox_coord = bbox_data[1:5]
                     label = bbox_data[6]
+                    if label == "URDBL":
+                        label = "OTHER"
 
                     for i, coord in enumerate(bbox_coord):
                         if is_valid_decimal(coord):
