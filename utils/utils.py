@@ -182,10 +182,10 @@ def read_annot(path: str) -> Dict:
                     label = bbox_data[6]
 
                     for i, coord in enumerate(bbox_coord):
-                        if utils.is_valid_decimal(coord):
+                        if is_valid_decimal(coord):
                             bbox_coord[i] = float(coord)
                         else:
-                            bbox_coord[i] = float(utils.cutoff_letter(coord))
+                            bbox_coord[i] = float(cutoff_letter(coord))
                
                     new_bbox = {
                         "bbox": bbox_coord,
