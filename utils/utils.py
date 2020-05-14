@@ -1,7 +1,9 @@
 import os
+from typing import Dict
+
 from PIL import Image
 
-def is_valid_decimal(string: str):
+def is_valid_decimal(string: str) -> bool:
     """Given a string e.g. "2.29" or "2.4a2",
     determine if you can convert it to a valid
     float.
@@ -18,7 +20,7 @@ def is_valid_decimal(string: str):
     else:
         return True
 
-def cutoff_letter(string: str):
+def cutoff_letter(string: str) -> str:
     """Keeps the first numerical characters.
 
     For instance:
@@ -32,7 +34,7 @@ def cutoff_letter(string: str):
         if char.isalpha():
             return string[:idx]
 
-def extract_data(filename: str, directory: str):
+def extract_data(filename: str, directory: str) -> Dict:
     """Extracts all the metadata from Traffic Sign Dataset
     into an dictionary (~JSON like structure).
 
@@ -153,3 +155,42 @@ def extract_data(filename: str, directory: str):
             annot_dict[img_path] = bbox
     return annot_dict
 
+def read_annot(path: str) -> Dict:
+    """Reads annotation files from Linköping Traffic Sign dataset
+    
+    Args:
+        path: Path to annotation file (.txt)
+    """
+    with open(path) as f:
+        lines = f.readlines()
+        lines = [line.replace("\n", "").replace(" ", "").split(":") for line in lines]
+        data = {line[0]: line[1].split(";") for line in lines}
+
+    for img in data:
+        bboxes = data[img]
+        #print(bboxes)
+        new_bboxes = list()
+        for bbox in bboxes:
+            if bbox == "MISC_SIGNS":
+                pass
+            else:
+                if bbox == "":
+                    pass
+                else:
+                    bbox_data = bbox.split(",")
+                    bbox_coord = bbox_data[1:5]
+                    label = bbox_data[6]
+
+                    for i, coord in enumerate(bbox_coord):
+                        if utils.is_valid_decimal(coord):
+                            bbox_coord[i] = float(coord)
+                        else:
+                            bbox_coord[i] = float(utils.cutoff_letter(coord))
+               
+                    new_bbox = {
+                        "bbox": bbox_coord,
+                        "label": label
+                        }
+                    new_bboxes.append(new_bbox)
+        data[img] = new_bboxes
+    return data
