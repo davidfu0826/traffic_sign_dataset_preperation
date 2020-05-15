@@ -243,6 +243,7 @@ if __name__ == "__main__":
         f.write(f"train={parent_dir}/image_paths.txt\n")
         f.write(f"valid={parent_dir}/image_paths.txt\n")
         f.write(f"names={parent_dir}/labels.names\n")
+    print(f"Output: \n{glob.glob(parent_dir + os.sep + '*')}")
 
     
     
