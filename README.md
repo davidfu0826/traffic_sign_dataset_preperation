@@ -23,13 +23,13 @@ In the following segment, very useful functions are listed:
 
 ## CLI commands
 ### `viz_darknet.py`
-Plot image with bounding boxes in Darknet format.
-- `python3 viz_darknet.py --img <img path> --annot <txt path> --names <path label file>`
-- Example CLI usage: `$ python3 viz_darknet.py --img image/img05.jpg --annot labels/img05.txt --names something/metadata.names`
+- **Purpose**: Plot image with bounding boxes in Darknet format.
+- **Usage**:   `python3 viz_darknet.py --img <img path> --annot <txt path> --names <path label file>`
+- **Example usage**: `$ python3 viz_darknet.py --img image/img05.jpg --annot labels/img05.txt --names something/metadata.names`
 ### `coco2darknet.py`
-Convert COCO JSON to Darknet format.
-- `python3 coco2darknet.py --json <json path> --img-dir <img dir path> --names <path label file> --num-classes <int>` 
-- Example CLI usage: `$ python3 coco2darknet.py --json data/coco_imglab.json --img-dir data/images --names data/traffic_signs.names --num-classes 33`
+- **Purpose**: Convert COCO JSON to Darknet format.
+- **Usage**:   `python3 coco2darknet.py --json <json path> --img-dir <img dir path> --names <path label file> --num-classes <int>` 
+- **Example usage**: `$ python3 coco2darknet.py --json data/coco_imglab.json --img-dir data/images --names data/traffic_signs.names --num-classes 33`
 
 ## Functions that can be used in python script/notebooks
 `visualization.py`
