@@ -22,10 +22,10 @@ Follow the following notebook to se examples of usage
 In the following segment, very useful functions are listed:
 
 ## CLI commands
-### Plot image with bounding boxes in Darknet format with `viz_darknet.py`
+#### Plot image with bounding boxes in Darknet format with `viz_darknet.py`
 - `python3 viz_darknet.py --img <img path> --annot <txt path> --names <path label file>`
 - Example CLI usage: `$ python3 viz_darknet.py --img image/img05.jpg --annot labels/img05.txt --names something/metadata.names`
-### Convert COCO JSON to Darknet format with `coco2darknet.py`
+#### Convert COCO JSON to Darknet format with `coco2darknet.py`
 
     parser.add_argument("--names", type=str, required=True,
                         help='path to .names file in Darknet format')
