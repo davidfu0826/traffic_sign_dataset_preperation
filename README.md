@@ -12,6 +12,11 @@ Not tested with other versions, but everything should work for an forseeable fut
  - matplotlib 3.1.1
  - seaborn 0.10.0
  - pandas 1.0.3
+ 
+# Installation
+1. `git clone https://github.com/davidfu0826/traffic_sign_dataset_preperation.git`
+2. `cd traffic_sign_dataset_preperation`
+3. `pip install -r requirements.txt`
 
 # Usage
 Follow the following notebook to se examples of usage
